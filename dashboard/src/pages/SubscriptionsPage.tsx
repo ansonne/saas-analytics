@@ -25,12 +25,14 @@ const STATUS_COLORS: Record<string, string> = {
   ACTIVE: 'hsl(var(--success))',
   INACTIVE: 'hsl(var(--muted-foreground))',
   CANCELED: 'hsl(var(--destructive))',
+  PAST_DUE: 'hsl(35 90% 55%)',
 }
 
 const STATUS_LABELS: Record<string, string> = {
   ACTIVE: 'Ativas',
   INACTIVE: 'Inativas',
   CANCELED: 'Canceladas',
+  PAST_DUE: 'Vencidas',
 }
 
 export default function SubscriptionsPage() {
@@ -124,7 +126,7 @@ export default function SubscriptionsPage() {
                       axisLine={{ stroke: 'hsl(var(--border))' }}
                       tickLine={{ stroke: 'hsl(var(--border))' }}
                     />
-                    <YAxis
+                    <YAxis allowDecimals={false}
                       tick={{ fontSize: 11, fill: 'hsl(var(--muted-foreground))' }}
                       axisLine={{ stroke: 'hsl(var(--border))' }}
                       tickLine={{ stroke: 'hsl(var(--border))' }}
@@ -176,7 +178,7 @@ export default function SubscriptionsPage() {
                       axisLine={{ stroke: 'hsl(var(--border))' }}
                       tickLine={{ stroke: 'hsl(var(--border))' }}
                     />
-                    <YAxis
+                    <YAxis allowDecimals={false}
                       tick={{ fontSize: 11, fill: 'hsl(var(--muted-foreground))' }}
                       axisLine={{ stroke: 'hsl(var(--border))' }}
                       tickLine={{ stroke: 'hsl(var(--border))' }}
@@ -237,7 +239,7 @@ export default function SubscriptionsPage() {
                     axisLine={{ stroke: 'hsl(var(--border))' }}
                     tickLine={{ stroke: 'hsl(var(--border))' }}
                   />
-                  <YAxis
+                  <YAxis allowDecimals={false}
                     tick={{ fontSize: 11, fill: 'hsl(var(--muted-foreground))' }}
                     axisLine={{ stroke: 'hsl(var(--border))' }}
                     tickLine={{ stroke: 'hsl(var(--border))' }}

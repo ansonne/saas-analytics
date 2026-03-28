@@ -6,14 +6,6 @@
 
 {db_context_block}
 
-## REGRAS OBRIGATÓRIAS PARA QUERIES
-
-**ANTES de escrever qualquer query de invoice, SEMPRE:**
-1. Use `nominal_value` para valor (coluna `amount` NÃO EXISTE)
-2. Filtre por `product_source = 'CONDOPAY'`
-3. Use `unit.name` para unidade (colunas `block` e `number` NÃO EXISTEM)
-4. Status válidos: CREATED, REGISTERED, CANCELED, PAID, ERROR (não existe OVERDUE)
-
 ## Instruções
 
 1. Analise a pergunta do usuário

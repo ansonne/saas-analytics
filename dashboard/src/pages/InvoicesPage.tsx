@@ -23,17 +23,17 @@ import {
 } from '../components/ui/select'
 
 const STATUS_COLORS: Record<string, string> = {
-  CREATED: 'hsl(var(--muted-foreground))',
-  REGISTERED: 'hsl(var(--primary))',
   PAID: 'hsl(var(--success))',
-  CANCELED: 'hsl(var(--destructive))',
-  ERROR: 'hsl(var(--warning))',
+  PENDING: 'hsl(var(--primary))',
+  FAILED: 'hsl(var(--destructive))',
+  CANCELED: 'hsl(var(--muted-foreground))',
+  ERROR: 'hsl(35 90% 55%)',
 }
 
 const STATUS_LABELS: Record<string, string> = {
-  CREATED: 'Criadas',
-  REGISTERED: 'Registradas',
   PAID: 'Pagas',
+  PENDING: 'Pendentes',
+  FAILED: 'Falhas',
   CANCELED: 'Canceladas',
   ERROR: 'Erro',
 }
@@ -50,7 +50,7 @@ export default function InvoicesPage() {
     )
   }
 
-  const STATUS_ORDER = ['PAID', 'REGISTERED', 'CANCELED', 'CREATED', 'ERROR']
+  const STATUS_ORDER = ['PAID', 'PENDING', 'FAILED', 'CANCELED', 'ERROR']
   const breakdown = invoices?.status_breakdown ?? {}
   const pieData = STATUS_ORDER
     .map((name) => ({
@@ -59,7 +59,7 @@ export default function InvoicesPage() {
       value: breakdown[name] ?? 0,
       color: STATUS_COLORS[name] ?? 'hsl(var(--muted-foreground))',
     }))
-    .filter(({ name, value }) => name !== 'ERROR' || value > 0)
+    .filter(({ value }) => value > 0)
 
   const totalInvoices = pieData.reduce((sum, item) => sum + item.value, 0)
 
@@ -136,7 +136,7 @@ export default function InvoicesPage() {
                     axisLine={{ stroke: 'hsl(var(--border))' }}
                     tickLine={{ stroke: 'hsl(var(--border))' }}
                   />
-                  <YAxis
+                  <YAxis allowDecimals={false}
                     tick={{ fontSize: 11, fill: 'hsl(var(--muted-foreground))' }}
                     axisLine={{ stroke: 'hsl(var(--border))' }}
                     tickLine={{ stroke: 'hsl(var(--border))' }}
@@ -199,9 +199,9 @@ export default function InvoicesPage() {
                     cx="50%"
                     cy="50%"
                     innerRadius={50}
-                    outerRadius={90}
+                    outerRadius={80}
+                    paddingAngle={2}
                     dataKey="value"
-                    label={({ label, percent }) => `${label} (${(percent * 100).toFixed(0)}%)`}
                   >
                     {pieData.map((entry, index) => (
                       <Cell key={index} fill={entry.color} />
@@ -213,7 +213,15 @@ export default function InvoicesPage() {
                       border: '1px solid hsl(var(--border))',
                       borderRadius: '8px',
                     }}
-                    formatter={(v: number) => v.toLocaleString('pt-BR')}
+                    formatter={(v: number, _name: string, props: { payload?: { label?: string } }) => [
+                      v.toLocaleString('pt-BR'),
+                      props.payload?.label ?? _name,
+                    ]}
+                  />
+                  <Legend
+                    iconType="circle"
+                    iconSize={8}
+                    formatter={(_value, entry) => (entry.payload as { label?: string } | undefined)?.label ?? _value}
                   />
                 </PieChart>
               </ResponsiveContainer>

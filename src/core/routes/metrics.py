@@ -139,7 +139,7 @@ async def get_subscription_metrics(
         cancellation_series=cancellations,
         status_breakdown={
             "ACTIVE": 2043,
-            "CANCELLED": 487,
+            "CANCELED": 487,
             "PAST_DUE": 62,
         },
     )

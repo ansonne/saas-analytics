@@ -4,11 +4,8 @@ Returns realistic fake data — no external database connections required.
 """
 from __future__ import annotations
 
-import json
-import sys
 import logging
 from contextlib import asynccontextmanager
-from typing import Any
 
 logger = logging.getLogger(__name__)
 
@@ -63,32 +60,32 @@ MOCK_SCHEMAS = {
 MOCK_CUSTOMERS = [
     {
         "id": 1,
-        "name": "Condomínio Edifício Solar",
-        "email": "admin@edificiosolar.com.br",
+        "name": "Nexora Tecnologia",
+        "email": "admin@nexora.com.br",
         "status": "ACTIVE",
     },
     {
         "id": 2,
-        "name": "Residencial Vista Verde",
-        "email": "financeiro@vistaverde.com.br",
+        "name": "Veltrix Soluções",
+        "email": "hello@veltrix.com.br",
         "status": "ACTIVE",
     },
     {
         "id": 3,
-        "name": "Condomínio Parque das Flores",
-        "email": "sindico@parqueflores.com.br",
+        "name": "Kairox Digital",
+        "email": "contact@kairox.com.br",
         "status": "ACTIVE",
     },
     {
         "id": 4,
-        "name": "Edifício Monte Azul",
-        "email": "admin@monteazul.com.br",
+        "name": "Lumera Sistemas",
+        "email": "admin@lumera.com.br",
         "status": "ACTIVE",
     },
     {
         "id": 5,
-        "name": "Residencial Bela Aurora",
-        "email": "adm@belaaurora.com.br",
+        "name": "Orbita Software",
+        "email": "hello@orbita.io",
         "status": "ACTIVE",
     },
 ]
@@ -186,6 +183,6 @@ class _MockMCPTools:
 
 
 @asynccontextmanager
-async def make_condopay_mcp():
+async def make_servicepay_mcp():
     """Async context manager returning a mock MCP tools object for ServicePay demo."""
     yield _MockMCPTools()

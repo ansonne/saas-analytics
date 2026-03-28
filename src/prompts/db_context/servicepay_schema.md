@@ -14,37 +14,6 @@ Registro de atividades de clientes.
 - created_at: DATETIME
 ```
 
-### condominium
-Condomínios cadastrados.
-```sql
-- id: INT
-- name: VARCHAR
-- cnpj: VARCHAR
-- credit_factor: DECIMAL
-- provider_id: INT
-- created_at: DATETIME
-- updated_at: DATETIME
-- deleted_at: DATETIME
-```
-
-### unit
-Unidades (apartamentos).
-```sql
-- id: INT (PK, auto_increment)
-- provider_id: INT (UNI)
-- erp_id: VARCHAR(32)
-- owner_id: INT (FK customer)
-- tenant_id: INT (FK customer)
-- billed: ENUM('OWNER','TENANT')
-- name: VARCHAR(255) -- identificador da unidade (ex: "Bloco A - 101")
-- condominium_id: INT (FK condominium)
-- created_at: TIMESTAMP(6)
-- updated_at: TIMESTAMP(6)
-- deleted_at: TIMESTAMP(6)
-```
-
-**NOTA:** Não existem colunas `block` ou `number` separadas. Use `name` para identificar a unidade.
-
 ### customer
 Clientes (proprietários e inquilinos).
 ```sql
@@ -100,7 +69,7 @@ Faturas (boletos).
 - expiration_days: INT
 - vouch_link_status: ENUM('PENDING','READY')
 - status: ENUM('CREATED','REGISTERED','CANCELED','PAID','ERROR')
-- product_source: ENUM('RG','CONDOPAY') -- SEMPRE filtrar por product_source = 'CONDOPAY'
+- product_source: ENUM('SERVICEPAY')
 - display_id: BIGINT (auto_increment)
 - provider_agreement_id: INT
 - type: ENUM('NORMAL','AGREEMENT_INSTALLMENT')
@@ -110,7 +79,7 @@ Faturas (boletos).
 ```
 
 **IMPORTANTE:**
-- Sempre incluir `WHERE product_source = 'CONDOPAY'` em queries de invoice
+- Sempre incluir `WHERE ` em queries de invoice
 - Use `nominal_value` para valor (NÃO existe coluna 'amount')
 - Dados do pagador estão diretamente na invoice (payer_*), não precisa JOIN com customer
 
@@ -205,13 +174,9 @@ SELECT
   i.status,
   i.reference_month,
   i.payer_name,
-  i.payer_email,
-  u.name AS unidade,
-  c.name AS condominio
+  i.payer_email
 FROM invoice i
-JOIN unit u ON i.unit_id = u.id
-JOIN condominium c ON u.condominium_id = c.id
-WHERE i.product_source = 'CONDOPAY'
+WHERE i.
   AND i.deleted_at IS NULL
 ORDER BY i.created_at DESC
 LIMIT 20;
@@ -226,12 +191,10 @@ FROM audit_log
 WHERE created_at >= DATE_SUB(NOW(), INTERVAL 30 DAY);
 ```
 
-### Assinaturas Ativas por Condomínio
+### Assinaturas Ativas por Cliente
 ```sql
 SELECT c.name, COUNT(s.id) as active_subscriptions
 FROM subscription s
-JOIN unit u ON s.unit_id = u.id
-JOIN condominium c ON u.condominium_id = c.id
 WHERE s.status = 'ACTIVE' AND s.deleted_at IS NULL
 GROUP BY c.id ORDER BY active_subscriptions DESC LIMIT 20;
 ```
@@ -243,7 +206,7 @@ SELECT
   COUNT(*) AS total_faturas,
   SUM(nominal_value) AS valor_total
 FROM invoice
-WHERE product_source = 'CONDOPAY'
+WHERE 
   AND status = 'PAID'
   AND deleted_at IS NULL
 GROUP BY DATE_FORMAT(reference_month, '%Y-%m')

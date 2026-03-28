@@ -1,25 +1,25 @@
-import { useState, useEffect, useRef } from 'react'
+import { ArrowLeft, LayoutDashboard, Loader2, Plus, Send, Sparkles, Trash2 } from 'lucide-react'
+import { useEffect, useRef, useState } from 'react'
 import { Link } from 'react-router-dom'
-import { ArrowLeft, Plus, Trash2, Send, Loader2, Sparkles, LayoutDashboard } from 'lucide-react'
+import CanvasPanel from '../canvas/CanvasPanel'
+import ChatMessage from '../components/ChatMessage'
+import { Button } from '../components/ui/button'
+import { Card } from '../components/ui/card'
+import { ScrollArea } from '../components/ui/scroll-area'
+import { Textarea } from '../components/ui/textarea'
 import {
-  useChatSessions,
   useChatSession,
+  useChatSessions,
   useCreateChatSession,
   useDeleteChatSession,
 } from '../hooks/useApi'
-import { useStreamingChat } from '../hooks/useStreamingChat'
 import { useCanvasStore } from '../hooks/useCanvasStore'
-import ChatMessage from '../components/ChatMessage'
-import CanvasPanel from '../canvas/CanvasPanel'
-import { Button } from '../components/ui/button'
-import { Textarea } from '../components/ui/textarea'
-import { ScrollArea } from '../components/ui/scroll-area'
-import { Card } from '../components/ui/card'
+import { useStreamingChat } from '../hooks/useStreamingChat'
 import { cn } from '../lib/utils'
 
 function extractCanvasTitle(content: string): string | undefined {
   for (const line of content.split('\n')) {
-    const text = line.replace(/^#+\s*/, '').trim()
+    const text = line.replace(/^#+\s*/, '').replace(/\*\*/g, '').trim()
     if (text) return text
   }
   return undefined
@@ -206,7 +206,7 @@ export default function ChatPage() {
                         "Quantos usuários ativos tivemos hoje?",
                         "Mostre um gráfico de pagamentos dos últimos 30 dias",
                         "Qual a distribuição de status das faturas?",
-                        "Quais condomínios têm mais assinaturas ativas?",
+                        "Quais clientes têm mais assinaturas ativas?",
                       ].map((suggestion, i) => (
                         <button
                           key={i}
@@ -230,10 +230,10 @@ export default function ChatPage() {
                       const alreadySaved = last?.role === 'user' && last?.content === pendingUserMessage
                       return !alreadySaved
                     })() && (
-                      <ChatMessage
-                        message={{ id: -2, session_id: selectedSessionId || '', role: 'user', content: pendingUserMessage, created_at: new Date().toISOString() }}
-                      />
-                    )}
+                        <ChatMessage
+                          message={{ id: -2, session_id: selectedSessionId || '', role: 'user', content: pendingUserMessage, created_at: new Date().toISOString() }}
+                        />
+                      )}
                     {(currentContent || isStreaming) && (
                       <ChatMessage
                         message={{ id: -1, session_id: selectedSessionId || '', role: 'assistant', content: currentContent || '', created_at: new Date().toISOString() }}

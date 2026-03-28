@@ -10,7 +10,7 @@ const CHAT_WIDTH_NARROW = 400
 const CHAT_WIDTH_WIDE = 600
 
 export default function Layout() {
-  const [chatOpen, setChatOpen] = useState(true)
+  const [chatOpen, setChatOpen] = useState(false)
   const [chatExpanded, setChatExpanded] = useState(() => {
     return localStorage.getItem('chatSidebarExpanded') === 'true'
   })

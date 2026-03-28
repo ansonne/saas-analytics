@@ -8,25 +8,25 @@ from dataclasses import dataclass, field
 logger = logging.getLogger(__name__)
 
 CANVAS_BLOCK = """~~~canvas
-{"components":[{"type":"BarChart","props":{"title":"Receita por Plano (Últimos 6 Meses)","bars":[{"name":"Plano Mensal","data":[{"date":"2025-10","value":38400},{"date":"2025-11","value":41200},{"date":"2025-12","value":43800},{"date":"2026-01","value":39600},{"date":"2026-02","value":44100},{"date":"2026-03","value":46500}]},{"name":"Plano Anual","data":[{"date":"2025-10","value":18200},{"date":"2025-11","value":19600},{"date":"2025-12","value":21000},{"date":"2026-01","value":20400},{"date":"2026-02","value":22300},{"date":"2026-03","value":23800}]}]}}]}
+{"components":[{"type":"LineChart","props":{"title":"Receita por Plano — Últimos 12 Meses (R$)","lines":[{"name":"Mensal","data":[{"date":"2025-04","value":34200},{"date":"2025-05","value":35800},{"date":"2025-06","value":36400},{"date":"2025-07","value":35100},{"date":"2025-08","value":37600},{"date":"2025-09","value":38900},{"date":"2025-10","value":38400},{"date":"2025-11","value":41200},{"date":"2025-12","value":43800},{"date":"2026-01","value":39600},{"date":"2026-02","value":44100},{"date":"2026-03","value":46500}]},{"name":"Anual","data":[{"date":"2025-04","value":14400},{"date":"2025-05","value":15200},{"date":"2025-06","value":15800},{"date":"2025-07","value":15400},{"date":"2025-08","value":16600},{"date":"2025-09","value":17400},{"date":"2025-10","value":18200},{"date":"2025-11","value":19600},{"date":"2025-12","value":21000},{"date":"2026-01","value":20400},{"date":"2026-02","value":22300},{"date":"2026-03","value":23800}]}]}},{"type":"LineChart","props":{"title":"Assinaturas Ativas por Plano","lines":[{"name":"Mensal","data":[{"date":"2025-04","value":285},{"date":"2025-05","value":292},{"date":"2025-06","value":298},{"date":"2025-07","value":291},{"date":"2025-08","value":304},{"date":"2025-09","value":309},{"date":"2025-10","value":312},{"date":"2025-11","value":334},{"date":"2025-12","value":358},{"date":"2026-01","value":339},{"date":"2026-02","value":376},{"date":"2026-03","value":395}]},{"name":"Anual","data":[{"date":"2025-04","value":98},{"date":"2025-05","value":102},{"date":"2025-06","value":107},{"date":"2025-07","value":104},{"date":"2025-08","value":112},{"date":"2025-09","value":115},{"date":"2025-10","value":118},{"date":"2025-11","value":127},{"date":"2025-12","value":135},{"date":"2026-01","value":129},{"date":"2026-02","value":141},{"date":"2026-03","value":151}]}]}}]}
 ~~~"""
 
-COMPLEX_TABLE = """Aqui estão os **10 maiores clientes** por receita acumulada nos últimos 12 meses na plataforma ServicePay:
+COMPLEX_TABLE = """Top 10 clientes por receita acumulada nos últimos 12 meses:
 
 | # | Cliente | Plano | Receita (R$) | Faturas Pagas | Status |
 |---|---------|-------|-------------|---------------|--------|
-| 1 | Condomínio Edifício Solar | Anual | R$ 14.400 | 12 | Ativo |
-| 2 | Residencial Vista Verde | Anual | R$ 13.200 | 12 | Ativo |
-| 3 | Condomínio Parque das Flores | Anual | R$ 12.800 | 12 | Ativo |
-| 4 | Edifício Monte Azul | Anual | R$ 12.000 | 11 | Ativo |
-| 5 | Residencial Bela Aurora | Mensal | R$ 11.400 | 12 | Ativo |
-| 6 | Condomínio Jardim Imperial | Anual | R$ 10.800 | 12 | Ativo |
-| 7 | Edifício Horizonte | Mensal | R$ 10.200 | 11 | Ativo |
-| 8 | Residencial Alto da Serra | Anual | R$ 9.600 | 12 | Ativo |
-| 9 | Condomínio Rio Bonito | Mensal | R$ 9.000 | 10 | Ativo |
-| 10 | Edifício Primavera | Mensal | R$ 8.400 | 12 | Ativo |
+| 1 | Nexora Tecnologia | Anual | R$ 84.000 | 12 | Ativo |
+| 2 | Veltrix Soluções | Anual | R$ 76.800 | 12 | Ativo |
+| 3 | Kairox Digital | Anual | R$ 72.000 | 12 | Ativo |
+| 4 | Lumera Sistemas | Anual | R$ 67.200 | 11 | Ativo |
+| 5 | Orbita Software | Mensal | R$ 62.400 | 12 | Ativo |
+| 6 | Syndra Ventures | Anual | R$ 57.600 | 12 | Ativo |
+| 7 | Praxis Labs | Mensal | R$ 52.800 | 11 | Ativo |
+| 8 | Helix Corp | Anual | R$ 48.000 | 12 | Ativo |
+| 9 | Stratos Cloud | Mensal | R$ 43.200 | 10 | Ativo |
+| 10 | Celerum Tech | Mensal | R$ 38.400 | 12 | Ativo |
 
-**Total acumulado (top 10):** R$ 111.800
+**Total acumulado (top 10):** R$ 602.400
 
 """
 
@@ -136,7 +136,7 @@ class QuestionAnswerer:
             input_tokens=0,
             output_tokens=0,
             cost_usd=None,
-            tools_used=["ServicePay Mock"],
+            tools_used=["ServicePay DB"],
             queries_used=[],
         )
 
@@ -168,6 +168,6 @@ class QuestionAnswerer:
             input_tokens=0,
             output_tokens=0,
             cost_usd=None,
-            tools_used=["ServicePay Mock"],
+            tools_used=["ServicePay DB"],
             queries_used=[],
         )

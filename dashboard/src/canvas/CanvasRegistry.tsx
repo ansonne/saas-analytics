@@ -79,7 +79,26 @@ function CanvasLineChart({ title, lines }: LineChartProps) {
               <XAxis dataKey="date" tick={{ fontSize: 11 }} />
               <YAxis tick={{ fontSize: 11 }} />
               <Tooltip />
-              {lines.length > 1 && <Legend />}
+              {lines.length > 1 && (
+                <Legend
+                  content={({ payload }) => (
+                    <div style={{ display: 'flex', gap: 16, justifyContent: 'center', marginTop: 8, fontSize: 12 }}>
+                      {(payload ?? []).map((entry, i) => (
+                        <div key={entry.value} style={{ display: 'flex', alignItems: 'center', gap: 6 }}>
+                          <svg width="24" height="12">
+                            {i % 2 === 1 ? (
+                              <line x1="0" y1="6" x2="24" y2="6" stroke={entry.color} strokeWidth="2" strokeDasharray="5 4" />
+                            ) : (
+                              <line x1="0" y1="6" x2="24" y2="6" stroke={entry.color} strokeWidth="2" />
+                            )}
+                          </svg>
+                          <span style={{ color: 'hsl(var(--foreground))' }}>{entry.value}</span>
+                        </div>
+                      ))}
+                    </div>
+                  )}
+                />
+              )}
               {lines.map((s, i) => (
                 <Line
                   key={s.name}
@@ -88,6 +107,7 @@ function CanvasLineChart({ title, lines }: LineChartProps) {
                   stroke={COLORS[i % COLORS.length]}
                   dot={false}
                   strokeWidth={2}
+                  strokeDasharray={i % 2 === 1 ? '5 4' : undefined}
                 />
               ))}
             </RechartsLine>

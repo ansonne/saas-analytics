@@ -1,4 +1,24 @@
 import { Users, CreditCard, FileText, TrendingUp, Zap } from 'lucide-react'
+
+const ACTION_LABELS: Record<string, string> = {
+  LOGIN_SUCCEEDED: 'Login realizado',
+  LOGIN_FAILED: 'Login falhou',
+  PAYMENT_CARD_OK: 'Pagamento aprovado',
+  PAYMENT_CARD_FAILED: 'Pagamento recusado',
+  PAYMENT_PIX_OK: 'Pagamento PIX realizado',
+  PAYMENT_SLIP_OK: 'Pagamento via boleto',
+  SUBSCRIPTION_CREATED: 'Assinatura criada',
+  SUBSCRIPTION_UPDATED: 'Assinatura atualizada',
+  SUBSCRIPTION_CANCELLED: 'Assinatura cancelada',
+  SUBSCRIPTION_PAYMENT_OK: 'Pgto. assinatura aprovado',
+  SUBSCRIPTION_PAYMENT_FAILED: 'Pgto. assinatura recusado',
+  CARD_CREATED: 'Cartão cadastrado',
+  CARD_UPDATED: 'Cartão atualizado',
+  CARD_INACTIVE: 'Cartão inativado',
+  INVOICE_VIEWED: 'Fatura visualizada',
+  INVOICE_PIX_CREATED: 'Cobrança PIX gerada',
+  INVOICE_SLIP_CREATED: 'Boleto gerado',
+}
 import {
   LineChart,
   Line,
@@ -85,7 +105,7 @@ export default function OverviewPage() {
                       axisLine={{ stroke: 'hsl(var(--border))' }}
                       tickLine={{ stroke: 'hsl(var(--border))' }}
                     />
-                    <YAxis
+                    <YAxis allowDecimals={false}
                       tick={{ fontSize: 11, fill: 'hsl(var(--muted-foreground))' }}
                       axisLine={{ stroke: 'hsl(var(--border))' }}
                       tickLine={{ stroke: 'hsl(var(--border))' }}
@@ -137,7 +157,7 @@ export default function OverviewPage() {
                       axisLine={{ stroke: 'hsl(var(--border))' }}
                       tickLine={{ stroke: 'hsl(var(--border))' }}
                     />
-                    <YAxis
+                    <YAxis allowDecimals={false}
                       tick={{ fontSize: 11, fill: 'hsl(var(--muted-foreground))' }}
                       domain={[0, 100]}
                       axisLine={{ stroke: 'hsl(var(--border))' }}
@@ -187,7 +207,7 @@ export default function OverviewPage() {
                 style={{ animationDelay: `${index * 50}ms` }}
               >
                 <div className="flex justify-between text-sm mb-1.5">
-                  <span className="text-foreground font-medium">{action}</span>
+                  <span className="text-foreground font-medium">{ACTION_LABELS[action] ?? action}</span>
                   <span className="text-muted-foreground tabular-nums">
                     {count.toLocaleString('pt-BR')}
                   </span>

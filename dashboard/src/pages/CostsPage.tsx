@@ -145,7 +145,7 @@ export default function CostsPage() {
               <BarChart data={chartData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                 <XAxis dataKey="date" tick={{ fontSize: 12 }} stroke="hsl(var(--muted-foreground))" />
-                <YAxis
+                <YAxis allowDecimals={false}
                   tickFormatter={(v) => `$${v.toFixed(4)}`}
                   tick={{ fontSize: 11 }}
                   stroke="hsl(var(--muted-foreground))"
@@ -180,7 +180,7 @@ export default function CostsPage() {
               <BarChart data={chartData}>
                 <CartesianGrid strokeDasharray="3 3" stroke="hsl(var(--border))" />
                 <XAxis dataKey="date" tick={{ fontSize: 12 }} stroke="hsl(var(--muted-foreground))" />
-                <YAxis
+                <YAxis allowDecimals={false}
                   tickFormatter={(v) => formatTokens(v)}
                   tick={{ fontSize: 11 }}
                   stroke="hsl(var(--muted-foreground))"

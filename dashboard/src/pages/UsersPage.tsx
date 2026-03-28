@@ -70,12 +70,12 @@ export default function UsersPage() {
         <CardContent>
           <form onSubmit={handleInvite} className="flex gap-3 items-end flex-wrap">
             <div className="space-y-1.5 flex-1 min-w-48">
-              <label className="text-sm font-medium">E-mail (@condoconta.com.br)</label>
+              <label className="text-sm font-medium">E-mail (@demo.com)</label>
               <input
                 type="email"
                 value={inviteEmail}
                 onChange={(e) => setInviteEmail(e.target.value)}
-                placeholder="nome@condoconta.com.br"
+                placeholder="nome@demo.com"
                 required
                 className="flex h-9 w-full rounded-md border border-input bg-background px-3 py-1 text-sm focus-visible:outline-none focus-visible:ring-1 focus-visible:ring-ring"
               />

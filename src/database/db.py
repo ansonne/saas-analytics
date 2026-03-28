@@ -4,11 +4,11 @@ import logging
 from contextlib import asynccontextmanager
 from typing import AsyncGenerator
 
+from sqlalchemy import inspect, text
 from sqlalchemy.ext.asyncio import AsyncSession, async_sessionmaker, create_async_engine
 
-from sqlalchemy import inspect, text
-
 from database.models import Base
+from utils.secrets import secrets
 
 
 def _migrate_schema(conn) -> None:  # type: ignore[type-arg]
@@ -20,7 +20,6 @@ def _migrate_schema(conn) -> None:  # type: ignore[type-arg]
     session_cols = {col["name"] for col in inspector.get_columns("chat_session")}
     if "user_id" not in session_cols:
         conn.execute(text("ALTER TABLE chat_session ADD COLUMN user_id VARCHAR(36) REFERENCES user(id) ON DELETE CASCADE"))
-from utils.secrets import secrets
 
 logger = logging.getLogger(__name__)
 

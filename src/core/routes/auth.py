@@ -14,7 +14,6 @@ from database.models import User
 
 router = APIRouter(prefix="/auth", tags=["auth"])
 
-_ALLOWED_DOMAIN = "condoconta.com.br"
 
 
 class LoginRequest(BaseModel):
@@ -102,11 +101,6 @@ async def invite_user(
     inviter: User = Depends(get_current_user),
 ):
     email = body.email.lower().strip()
-    if not email.endswith(f"@{_ALLOWED_DOMAIN}"):
-        raise HTTPException(
-            status_code=400,
-            detail=f"Email must belong to @{_ALLOWED_DOMAIN}",
-        )
 
     valid_roles = {"USER", "ADMIN", "MASTER"}
     role = body.role.upper()

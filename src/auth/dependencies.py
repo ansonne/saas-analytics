@@ -1,8 +1,6 @@
 from __future__ import annotations
 
 from fastapi import Depends, HTTPException, Request
-from sqlalchemy import select
-
 from auth.security import decode_access_token
 from database.db import get_db_session
 from database.models import User

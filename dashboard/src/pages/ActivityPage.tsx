@@ -1,4 +1,24 @@
 import { useState } from 'react'
+
+const ACTION_LABELS: Record<string, string> = {
+  LOGIN_SUCCEEDED: 'Login realizado',
+  LOGIN_FAILED: 'Login falhou',
+  PAYMENT_CARD_OK: 'Pagamento aprovado',
+  PAYMENT_CARD_FAILED: 'Pagamento recusado',
+  PAYMENT_PIX_OK: 'Pagamento PIX realizado',
+  PAYMENT_SLIP_OK: 'Pagamento via boleto',
+  SUBSCRIPTION_CREATED: 'Assinatura criada',
+  SUBSCRIPTION_UPDATED: 'Assinatura atualizada',
+  SUBSCRIPTION_CANCELLED: 'Assinatura cancelada',
+  SUBSCRIPTION_PAYMENT_OK: 'Pgto. assinatura aprovado',
+  SUBSCRIPTION_PAYMENT_FAILED: 'Pgto. assinatura recusado',
+  CARD_CREATED: 'Cartão cadastrado',
+  CARD_UPDATED: 'Cartão atualizado',
+  CARD_INACTIVE: 'Cartão inativado',
+  INVOICE_VIEWED: 'Fatura visualizada',
+  INVOICE_PIX_CREATED: 'Cobrança PIX gerada',
+  INVOICE_SLIP_CREATED: 'Boleto gerado',
+}
 import {
   LineChart,
   Line,
@@ -39,7 +59,7 @@ export default function ActivityPage() {
 
   const pieData = Object.entries(activity?.actions_breakdown ?? {})
     .slice(0, 6)
-    .map(([name, value]) => ({ name, value }))
+    .map(([name, value]) => ({ name: ACTION_LABELS[name] ?? name, value }))
 
   return (
     <div className="space-y-6">
@@ -79,7 +99,7 @@ export default function ActivityPage() {
                     axisLine={{ stroke: 'hsl(var(--border))' }}
                     tickLine={{ stroke: 'hsl(var(--border))' }}
                   />
-                  <YAxis
+                  <YAxis allowDecimals={false}
                     tick={{ fontSize: 11, fill: 'hsl(var(--muted-foreground))' }}
                     axisLine={{ stroke: 'hsl(var(--border))' }}
                     tickLine={{ stroke: 'hsl(var(--border))' }}
@@ -172,7 +192,7 @@ export default function ActivityPage() {
                       key={action}
                       className="flex justify-between text-sm py-2 border-b border-border last:border-0"
                     >
-                      <span className="text-foreground">{action}</span>
+                      <span className="text-foreground">{ACTION_LABELS[action] ?? action}</span>
                       <span className="text-muted-foreground font-medium tabular-nums">
                         {count.toLocaleString('pt-BR')}
                       </span>
