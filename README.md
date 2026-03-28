@@ -23,17 +23,16 @@ A full-stack product analytics platform with an embedded AI assistant that answe
 
 ## Screenshots
 
-<div align="center">
-
-<img src="screenshots/02_activity.png" width="49%" />&nbsp;<img src="screenshots/03_invoices.png" width="49%" />
-
-*Activity — daily active users + action breakdown* &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp; *Invoices — created vs paid + status distribution*
-
-<img src="screenshots/04_subscriptions.png" width="49%" />
-
-*Subscriptions — new, cancelled, payment success*
-
-</div>
+<table>
+  <tr>
+    <td align="center" width="50%"><img src="screenshots/02_activity.png" width="100%" /><br/><em>Activity — daily active users + action breakdown</em></td>
+    <td align="center" width="50%"><img src="screenshots/03_invoices.png" width="100%" /><br/><em>Invoices — created vs paid + status distribution</em></td>
+  </tr>
+  <tr>
+    <td align="center" width="50%"><img src="screenshots/04_subscriptions.png" width="100%" /><br/><em>Subscriptions — new, cancelled, payment success</em></td>
+    <td></td>
+  </tr>
+</table>
 
 ### AI Chat with Canvas
 
