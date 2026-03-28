@@ -5,6 +5,7 @@
 [![React](https://img.shields.io/badge/React-18-61DAFB?logo=react&logoColor=black)](https://react.dev)
 [![Vite](https://img.shields.io/badge/Vite-6-646CFF?logo=vite&logoColor=white)](https://vitejs.dev)
 [![License](https://img.shields.io/badge/License-MIT-green)](LICENSE)
+[![CI](https://github.com/ansonne/saas-analytics/actions/workflows/ci.yml/badge.svg)](https://github.com/ansonne/saas-analytics/actions/workflows/ci.yml)
 
 A full-stack product analytics platform with an embedded AI assistant that answers natural language questions about your SaaS data — and renders the results as charts, tables, and cards directly in the chat.
 
